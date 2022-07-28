@@ -1,20 +1,35 @@
 package com.example.javaee;
 
+import com.example.javaee.innerPackage.Cart;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class FirstServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String name = request.getParameter("name");
+        HttpSession session = request.getSession();
 
-        PrintWriter pw = response.getWriter();
-        pw.println("<html>");
-        pw.println("<h1> Hello "+ name +" programmer!!!</h1>");
-        pw.println("</html>");
+        Cart cart = (Cart) session.getAttribute("cart");
+
+        String name = request.getParameter("name");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        if (cart == null) {
+            cart = new Cart();
+            cart.setName(name);
+            cart.setQuantity(quantity);
+        }
+
+        session.setAttribute("cart", cart);
+//
+//        PrintWriter pw = response.getWriter();
+//        pw.println("<html>");
+//        pw.println("<h1>Count is " + count +"</h1>");
+//        pw.println("</html>");
+
+        getServletContext().getRequestDispatcher("/showCart.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
