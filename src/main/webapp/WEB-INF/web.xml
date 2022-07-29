@@ -40,6 +40,14 @@
         <servlet-name>DeleteCookiesServlet</servlet-name>
         <servlet-class>com.example.javaee.innerPackage.DeleteCookiesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LibraryServlet</servlet-name>
+        <servlet-class>com.example.javaee.innerPackage.LibraryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibraryServlet</servlet-name>
+        <url-pattern>/library</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteCookiesServlet</servlet-name>
         <url-pattern>/delete-cookies</url-pattern>
